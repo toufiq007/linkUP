@@ -1,14 +1,20 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
 const LoginForm = () => {
   const navigate = useNavigate();
+  const { setAuth } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (formdata) => {
+    const user = { ...formdata };
+
+    // HERE MAKE API CALL FOR GETTING THE AUTH TOKEN AND REFRESH TOKEN THEN THIS DATA AND USER DATA WILL BE SAVED TO THE AUTHCONTEXT
+
+    setAuth({ user });
     navigate("/");
   };
   return (
