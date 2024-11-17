@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -7,6 +9,7 @@ const LoginForm = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    navigate("/");
   };
   return (
     <>
@@ -32,7 +35,7 @@ const LoginForm = () => {
         </div>
         {/* <!-- password --> */}
         <div className="htmlForm-control">
-          <label className="auth-label" htmlFor="email">
+          <label className="auth-label" htmlFor="password">
             Password
           </label>
           <input
