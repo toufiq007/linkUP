@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import axios from "axios";
 const LoginForm = () => {
   const navigate = useNavigate();
   const { setAuth } = useAuth();
@@ -9,13 +10,29 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (formdata) => {
-    const user = { ...formdata };
+  const onSubmit = async (formdata) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_BASE_URL}/auth/login`,
+        formdata
+      );
+
+      if (response.status === 200) {
+        const { user, token } = response.data;
+        if (token) {
+          const authToken = token.token;
+          const refreshToken = token.refreshToken;
+
+          console.log(`login time auth token ${authToken}`);
+          setAuth({ user, token, refreshToken });
+          navigate("/");
+        }
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
 
     // HERE MAKE API CALL FOR GETTING THE AUTH TOKEN AND REFRESH TOKEN THEN THIS DATA AND USER DATA WILL BE SAVED TO THE AUTHCONTEXT
-
-    setAuth({ user });
-    navigate("/");
   };
   return (
     <>
