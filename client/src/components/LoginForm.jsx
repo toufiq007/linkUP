@@ -85,7 +85,7 @@ const LoginForm = () => {
           )}
         </div>
         {/* handling global errors */}
-        <p>{errors?.root?.random?.message}</p>
+        <p className="text-red-500">{errors?.root?.random?.message}</p>
         {/* <!-- Submit --> */}
         <button
           className="auth-input my-5 bg-lwsGreen font-bold text-deepDark transition-all hover:opacity-90"
