@@ -3,7 +3,9 @@ import Avatar from "../../assets/images/avatars/avatar_1.png";
 import HomeIcon from "../../assets/icons/home.svg";
 import Notification from "../../assets/icons/notification.svg";
 import Logout from "../Logout";
+import { useAuth } from "../../hooks/useAuth";
 const Header = () => {
+  const {auth} = useAuth()
   return (
     <>
       <nav className="sticky top-0 z-50 border-b border-[#3F3F3F] bg-[#1E1F24] py-4">
@@ -30,14 +32,14 @@ const Header = () => {
 
             <Logout />
 
-            <button className="flex-center !ml-8 gap-3">
-              <span className="text-lg font-medium lg:text-xl">Sumit</span>
+            <Link to="/profile" className="flex-center !ml-8 gap-3">
+              <span className="text-lg font-medium lg:text-xl">{auth?.user?.firstName}</span>
               <img
                 className="max-h-[32px] max-w-[32px] lg:max-h-[44px] lg:max-w-[44px]"
-                src={Avatar}
+                src={auth?.user?.avatar}
                 alt=""
               />
-            </button>
+            </Link>
           </div>
           {/* <!-- nav links ends --> */}
         </div>

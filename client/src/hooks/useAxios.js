@@ -14,6 +14,7 @@ const useAxios = () => {
         if (authToken) {
           config.headers.Authorization = `Bearer ${authToken}`;
         }
+        return config;
       },
       //   if error occured
       (error) => Promise.reject(error)
@@ -56,3 +57,4 @@ const useAxios = () => {
 
   return { api };
 };
+export default useAxios;
