@@ -9,6 +9,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm();
   const onSubmit = async (formdata) => {
     try {
@@ -24,11 +25,16 @@ const LoginForm = () => {
           const refreshToken = token.refreshToken;
 
           console.log(`login time auth token ${authToken}`);
-          setAuth({ user, token, refreshToken });
+          setAuth({ user, authToken, refreshToken });
           navigate("/");
         }
       }
     } catch (err) {
+      // handling global errors
+      setError("root.random", {
+        type: "random",
+        message: `User with email ${formdata.email} not found!!`,
+      });
       console.log(err.message);
     }
 
@@ -78,6 +84,8 @@ const LoginForm = () => {
             <p className="text-red-500">{errors.password.message}</p>
           )}
         </div>
+        {/* handling global errors */}
+        <p>{errors?.root?.random?.message}</p>
         {/* <!-- Submit --> */}
         <button
           className="auth-input my-5 bg-lwsGreen font-bold text-deepDark transition-all hover:opacity-90"
