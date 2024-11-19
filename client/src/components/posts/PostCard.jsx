@@ -4,14 +4,14 @@ import PostBody from "./PostBody";
 import PostComments from "./PostComments";
 import PostHeader from "./PostHeader";
 
-const PostCard = ({post}) => {
-        console.log(post)
+const PostCard = ({ post }) => {
+  console.log(post);
   return (
     <>
       <article className="card mt-6 lg:mt-8">
         <PostHeader post={post} />
         <PostBody poster={post?.image} content={post?.content} />
-        <PostActions />
+        <PostActions postId={post?.id} commentCount={post?.comments?.length} />
         <PostComments />
       </article>
     </>
