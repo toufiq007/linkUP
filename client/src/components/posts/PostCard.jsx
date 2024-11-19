@@ -5,11 +5,12 @@ import PostComments from "./PostComments";
 import PostHeader from "./PostHeader";
 
 const PostCard = ({post}) => {
+        console.log(post)
   return (
     <>
       <article className="card mt-6 lg:mt-8">
         <PostHeader post={post} />
-        <PostBody />
+        <PostBody poster={post?.image} content={post?.content} />
         <PostActions />
         <PostComments />
       </article>
